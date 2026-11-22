@@ -1,4 +1,3 @@
-
 # 《晶片的誕生》製作紀錄 production_log
 
 ## 1. 專案資訊
@@ -19,10 +18,10 @@
 | 階段 | 工具 | 成果 |
 |---|---|---|
 | 選題與研究 | Claude | 選定《晶片的誕生》 |
-| 文案與章節架構 | Claude | 開場、六章、結語 |
+| 文案與章節架構 | ChatGPT，Claude | 開場、六章、結語 |
 | 分鏡 v2 | Claude | 50 個連續運鏡鏡頭 |
 | 圖片提示詞、影片與運鏡提示詞 | Claude | chip_birth_image_prompts.md、chip_birth_video_prompts.md |
-| 台詞 | Claude，使用者修訂 | chip_birth_narration.md |
+| 台詞 | ChatGPT，Claude，使用者修訂 | chip_birth_narration.md |
 | 分鏡圖片 | Gemini，Nano Banana 2.1，16:9 | 50 多張靜態圖 |
 | 影片生成 | Gemini，Omni 1.2 Flash 與 1.1 Flash，720p，首尾幀 | 55 段影片 |
 | 配音 | CloneTTS，本地自架 API | 旁白音檔 |
@@ -42,7 +41,10 @@ flowchart TD
   E --> F["影片，55 段，720p<br/>Omni 1.2／1.1 Flash，938 點"]
   F --> H["剪輯、字幕、音樂<br/>剪映／CapCut"]
   G --> H
-  H --> I{"發布前檢查<br/>查證、授權、AI 揭露"}
+  H --> T{"TTS 句子聽起來奇怪嗎？"}
+  T -->|是，不斷微調| W["微調用字、標點、斷句<br/>同步改台詞檔，重新生成 TTS"]
+  W --> G
+  T -->|否| I{"發布前檢查<br/>查證、授權、AI 揭露"}
   I -->|需修正| H
   I -->|通過| J["發布"]
 ```
@@ -169,6 +171,7 @@ flowchart TD
 - [ ] 中文標題字（沙字、矽液、窗上水氣、雷射刻字、光描字、螢幕列表）無錯字
 - [ ] 旁白發音：AI 念「A、I」，「九個 9」念「九個九」
 - [ ] 音樂不蓋過旁白
+- [ ] TTS 微調後，台詞檔與字幕已同步成最終配音版本
 
 ## 8. 待補資料
 
@@ -177,4 +180,4 @@ flowchart TD
 - 背景音樂來源
 - 每段影片的重抽次數與審核結果
 - 各階段實際花費的時間
-- 
+- TTS 微調的次數，以及常需要修改的句子類型
